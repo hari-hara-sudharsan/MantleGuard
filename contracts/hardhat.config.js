@@ -1,15 +1,25 @@
-import "@nomicfoundation/hardhat-toolbox-mocha-ethers"; 
- 
-const config = { 
-  solidity: "0.8.28", 
-  networks: { 
-    hardhat: { 
-      type: "edr-simulated", 
-    }, 
-  }, 
-}; 
- 
-export default config; 
+import "@nomicfoundation/hardhat-toolbox-mocha-ethers";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const config = {
+  solidity: "0.8.28",
+
+  networks: {
+    hardhat: {
+      type: "edr-simulated",
+    },
+
+    mantleSepolia: {
+      type: "http",
+      url: process.env.MANTLE_RPC,
+      accounts: [process.env.PRIVATE_KEY],
+    },
+  },
+};
+
+export default config;
 
 
 
