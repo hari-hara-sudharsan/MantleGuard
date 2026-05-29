@@ -1,0 +1,42 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-0f82e099355a34dc3fa934c5ce8d316a492c8362",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "compilerType": "solc",
+  "userSourceNameMap": {
+    "contracts/AuditLogger.sol": "project/contracts/AuditLogger.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/AuditLogger.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract AuditLogger {\r\n\r\n    struct AuditRecord {\r\n        string contractName;\r\n        bytes32 auditHash;\r\n        uint256 timestamp;\r\n        address auditor;\r\n    }\r\n\r\n    AuditRecord[] public records;\r\n\r\n    event AuditLogged(\r\n        string contractName,\r\n        bytes32 auditHash,\r\n        uint256 timestamp,\r\n        address auditor\r\n    );\r\n\r\n    function logAudit(\r\n        string memory contractName,\r\n        bytes32 auditHash\r\n    ) public {\r\n\r\n        records.push(\r\n            AuditRecord(\r\n                contractName,\r\n                auditHash,\r\n                block.timestamp,\r\n                msg.sender\r\n            )\r\n        );\r\n\r\n        emit AuditLogged(\r\n            contractName,\r\n            auditHash,\r\n            block.timestamp,\r\n            msg.sender\r\n        );\r\n    }\r\n\r\n    function getAuditCount()\r\n        public\r\n        view\r\n        returns(uint256)\r\n    {\r\n        return records.length;\r\n    }\r\n}"
+      }
+    }
+  }
+}
